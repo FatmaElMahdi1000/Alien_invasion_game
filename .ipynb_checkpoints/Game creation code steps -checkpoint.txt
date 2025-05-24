@@ -1,0 +1,5 @@
+-1- using sys and pygame module for managing exit / player's quitting (SYS) , (PYGAME) for managing initial displayes screen (the surface where elements are also displayed 
+-2- Class creation for the game assests and behaviour\
+-3- using pygame.display.set_mode((, )) for tuple creation and defining screen width and screen height. 
+-4-using pygame.diplay.set_caption() for defining game title/ window title 
+-5- using while loop for handling events and updating the screen with every new event or actions. 
