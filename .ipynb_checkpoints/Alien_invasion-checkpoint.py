@@ -1,6 +1,6 @@
 # Main game file
 from ourship import Ship
-from bullets import bullet
+from bullets import Bullet
 from settings import Settings
 import sys
 import pygame
@@ -17,13 +17,13 @@ class AlienInvasion(Settings):
         # Create the ship
         self.ship = Ship(self)
         self.clock = pygame.time.Clock()
-        self.bullet = pygame.sprite.Group()
+        self.bullets = pygame.sprite.Group()
         
     def run_game(self):
         while True:
             self._check_events()
             self._update_screen()  # Added missing screen update call
-            self.bullet.update()  #updating bullet position while moving and being fired.
+            self.bullets.update()   #updating bullet position while moving and being fired.
           
     def _check_events(self):  # Fixed method name - missing underscore
         for event in pygame.event.get():
@@ -43,6 +43,8 @@ class AlienInvasion(Settings):
             sys.exit()
         elif event.key == pygame.K_ESCAPE:
             sys.exit()
+        elif event.key == pygame.K_SPACE:
+            self._fire_bullet()
             
     def _check_keyup_event(self, event): #releasing buttons
         if event.key == pygame.K_LEFT:
@@ -51,17 +53,24 @@ class AlienInvasion(Settings):
             self.ship.moving_right = False
 
     def _fire_bullet(self): #method to call to fire / create a bullet everytime, player press the spacebar
-        new_bullets = bullets(self) ##giving bullet file or the bullets an access to this file. 
-        self.bullet.add(new-bullets)
+        new_bullets = Bullet(self) ##giving bullet file or the bullets an access to this file. 
+        self.bullets.add(new_bullets)
             
     def _update_screen(self):  # Fixed method name
-        # Change background color to a bright one for visibility
+                # Change background color to a bright one for visibility
         self.screen.fill(self.bg_colour)  # Fixed attribute access
+        for bullet in self.bullets.sprites():
+            bullet.draw_bullet()
         # Draw the ship
         self.ship.blitme()
         self.ship.update()
-        pygame.display.flip()
+        for bullet in self.bullets.copy():
+            if bullet.rect.bottom <= 0:
+                self.bullets.remove(bullet)
+        print(len(self.bullets))
         self.clock.tick(60)
+        pygame.display.flip()
+
 
 if __name__ == '__main__':  # Fixed dunder name check
     ai = AlienInvasion()
