@@ -4,15 +4,17 @@ import pygame
 class Ship:
     """A class to manage the ship."""
     
-    def __init__(self, ai_game):
+    def __init__(self, ai_game): 
         """Initialize the ship and set its starting position."""
         self.screen = ai_game.screen   # This line assigns the game's screen
+        self.settings = ai_game.settings
         self.screen_rect = ai_game.screen.get_rect()
         
         # Load the ship image and scale it down to fit nicely
-        self.image = pygame.image.load('Images/rocket-icon.bmp')
-        self.image = pygame.transform.scale(self.image, (80, 70))  # Resize to 80x70 pixels
+        self.image = pygame.image.load('Images/pngtree-a-sleek-rocket-ship-icon-in-format-png-image_13642813.bmp')
+        self.image = pygame.transform.scale(self.image, (100, 100))  # Resize to 80x70 pixels
         self.rect = self.image.get_rect()
+        self.x = float(self.rect.x)
         
         # Start each new ship at the bottom center of the screen
         self.rect.midbottom = self.screen_rect.midbottom
@@ -24,10 +26,11 @@ class Ship:
         print("Ship position (midbottom):", self.rect.midbottom)
 
     def update(self):
-        if self.moving_right:
-            self.rect.x += 3
-        if self.moving_left: 
-            self.rect.x -= 3
+        if self.moving_right and self.rect.right < self.screen_rect.right:
+            self.x += self.settings.ship_speed
+        if self.moving_left and self.rect.left > 0:
+            self.x -= self.settings.ship_speed
+        self.rect.x = self.x
             
     def blitme(self):
         """Draw the ship at its current location."""
