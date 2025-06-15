@@ -1,5 +1,5 @@
 import pygame
-from pygame import Sprite #class of pygame
+from pygame.sprite import Sprite#class of pygame
 
 class bullet(Sprite):
     def __init__(self, ai_game):

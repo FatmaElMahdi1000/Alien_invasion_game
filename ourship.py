@@ -11,8 +11,8 @@ class Ship:
         self.screen_rect = ai_game.screen.get_rect()
         
         # Load the ship image and scale it down to fit nicely
-        self.image = pygame.image.load('Images/pngtree-a-sleek-rocket-ship-icon-in-format-png-image_13642813.bmp')
-        self.image = pygame.transform.scale(self.image, (100, 100))  # Resize to 80x70 pixels
+        self.image = pygame.image.load('Images/q4p9_rmax_210520 (1).bmp')
+        self.image = pygame.transform.scale(self.image, (80, 90))  
         self.rect = self.image.get_rect()
         self.x = float(self.rect.x)
         

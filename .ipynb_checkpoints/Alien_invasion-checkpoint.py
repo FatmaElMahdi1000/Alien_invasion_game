@@ -49,6 +49,10 @@ class AlienInvasion(Settings):
             self.ship.moving_left = False
         elif event.key == pygame.K_RIGHT:
             self.ship.moving_right = False
+
+    def _fire_bullet(self): #method to call to fire / create a bullet everytime, player press the spacebar
+        new_bullets = bullets(self) ##giving bullet file or the bullets an access to this file. 
+        self.bullet.add(new-bullets)
             
     def _update_screen(self):  # Fixed method name
         # Change background color to a bright one for visibility
