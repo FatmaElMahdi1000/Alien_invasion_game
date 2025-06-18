@@ -1,7 +1,7 @@
 class Settings:
     def __init__(self):
-        self.Screen_width = 800
-        self.Screen_height = 600
+        self.Screen_width = 1200 #dummy value, I'll override the values in alien_invasion file
+        self.Screen_height = 200 #dummy value, I'll override the values in alien_invasion file
         self.bg_colour = (255, 255, 255)  # Bright cyan for easy ship visibility
         self.ship_speed = 1.5
         #bullet_settings
