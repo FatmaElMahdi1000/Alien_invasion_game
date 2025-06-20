@@ -30,6 +30,7 @@ class AlienInvasion(Settings):
             self.ship.update()
             self._update_screen()  # Added missing screen update call
             self._update_bullets()
+            self._update_aliens()
             self.bullets.update()   #updating bullet position while moving and being fired
             self.clock.tick(60)
           
@@ -70,6 +71,10 @@ class AlienInvasion(Settings):
         for bullet in self.bullets.copy():
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
+    def _update_aliens(self):
+        self._check_fleet_edges()
+        self.aliens.update() #updating 
+        
 
     def _update_screen(self):  # Fixed method name
                 # Change background color to a bright one for visibility
@@ -99,7 +104,18 @@ class AlienInvasion(Settings):
             #reset x value and increment  y value
             current_x = alien_width
             current_y += 2 * alien_height
-            
+
+    def _change_fleet_direction(self):
+        for alien in self.aliens.sprites():
+            alien.rect.y += self.settings.fleet_drop_speed
+        self.settings.fleet_direction *= -1
+        
+    def _check_fleet_edges(self):
+        for alien in self.aliens.sprites():
+            if alien.check_edges():
+                self._change_fleet_direction()
+                break
+                
 if __name__ == '__main__':  # Fixed dunder name check
     ai = AlienInvasion()
     ai.run_game()
