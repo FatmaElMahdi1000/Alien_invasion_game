@@ -72,6 +72,10 @@ class AlienInvasion(Settings):
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
         collision = pygame.sprite.groupcollide(self.bullets, self.aliens,True,True)
+        if not self.aliens: #evaluates to false when no aliens on the screen
+            self.bullets.empty() #rm any bullets if no alien on the screen
+            self._create_fleet() #new fleet generated 
+            
         
     def _update_aliens(self):
         self._check_fleet_edges()
