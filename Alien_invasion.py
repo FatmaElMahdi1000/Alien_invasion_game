@@ -67,6 +67,7 @@ class AlienInvasion(Settings):
             So the condition becomes: button_clicked and False
             Result: Even if button is clicked, do nothing 🚫
             """
+            self.settings.initialize_dynamic_setting()
             self.stats.reset_stat()   ##reset game stats 
             self.game_active = True
             self.bullets.empty()###getting red of any remaining bullets and alients, then creating new fleet/centering the ship
@@ -108,6 +109,7 @@ class AlienInvasion(Settings):
         if not self.aliens:
             self.bullets.empty()
             self._create_fleet()
+            self.settings.increase_speed()
 
     def _update_aliens(self):
         self._check_fleet_edges()
@@ -163,8 +165,8 @@ class AlienInvasion(Settings):
                 break
 
     def _ship_hit(self):
-        if self.gamestats.ships_left > 0:
-            self.gamestats.ships_left -= 1
+        if self.stats.ships_left > 0:
+            self.stats.ships_left -= 1
             self.aliens.empty()
             self.bullets.empty()
             self._create_fleet()
@@ -172,6 +174,7 @@ class AlienInvasion(Settings):
             sleep(0.5)
         else:
             self.game_active = False
+            pygame.mouse.visible(True)
 
 
     def _check_aliens_bottom(self):
