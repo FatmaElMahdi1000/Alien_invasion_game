@@ -6,8 +6,8 @@ class Button:
         self.screen_rect = self.screen.get_rect()     #gets a rectangle that represents the entire screen. #it's to give us object, pygame.Rect used later for positioning the button
         #set dimensions 
         self.width, self.height = 200, 50
-        self.button_color = (0, 135, 0)
-        self.text_color = (255, 255, 255)
+        self.button_color = (0, 100, 200) 
+        self.text_color = (255, 255, 255)  
         self.font = pygame.font.SysFont(None, 48)
         #building object
         self.rect = pygame.Rect(0, 0,  self.width,self.height)      #A Rect is not a graphical object  it's just a math box: with .x, .y, .width, .height,  

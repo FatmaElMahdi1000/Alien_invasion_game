@@ -22,7 +22,7 @@ class AlienInvasion(Settings):
         pygame.display.set_caption(Game_Title)
 
         self.settings = self
-        self.gamestats = GameStat(self)
+        self.stats = GameStat(self)
         self.play_button = Button(self, "Play") 
         self.ship = Ship(self)
         self.clock = pygame.time.Clock()
@@ -54,13 +54,26 @@ class AlienInvasion(Settings):
             elif event.type == pygame.KEYUP:
                 self._check_keyup_event(event)
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                mouse_pos = pygame.mouse.get_pos()
+                mouse_pos = pygame.mouse.get_pos()     #This gives you the (x, y) position of where the player clicked. 
                 self._check_play_button(mouse_pos)
                 
     def _check_play_button(self, mouse_pos):
-        if self.play_button.rect.collidepoint(mouse_pos):
+        button_clicked = self.play_button.rect.collidepoint(mouse_pos) #button clicked means the value of self.game_active = True now, not false
+        if button_clicked and not self.game_active: 
+            """
+            When the game IS active (currently playing):
             self.game_active = True
-            
+            not self.game_active = not True = False
+            So the condition becomes: button_clicked and False
+            Result: Even if button is clicked, do nothing 🚫
+            """
+            self.stats.reset_stat()   ##reset game stats 
+            self.game_active = True
+            self.bullets.empty()###getting red of any remaining bullets and alients, then creating new fleet/centering the ship
+            self.aliens.empty()
+            self._create_fleet()
+            self.ship.center_ship()
+    
     def _check_keydown_event(self, event):
         if event.key == pygame.K_RIGHT:
             self.ship.moving_right = True
