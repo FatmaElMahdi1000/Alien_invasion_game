@@ -20,7 +20,7 @@ class Settings:
     def initialize_dynamic_setting(self):
         """Make it dynamic with each level change"""
         self.bullet_speed = 2.5
-        self.ship_speed = 1.5
+        self.ship_speed = 1.8
         self.alien_speed = 1.0 #alien's horizontal speed, movement
         #self.fleed_direction = 1, means moving right, -1 means moving left
         self.fleet_direction = 1

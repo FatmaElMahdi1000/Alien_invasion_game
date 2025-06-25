@@ -1,3 +1,4 @@
+from scoreboard import Score 
 from time import sleep
 from button import Button
 from Gamestat import GameStat
@@ -23,6 +24,7 @@ class AlienInvasion(Settings):
 
         self.settings = self
         self.stats = GameStat(self)
+        self.sb = Score(self) #making an instance/object of Score class here in Alient invasion 
         self.play_button = Button(self, "Play") 
         self.ship = Ship(self)
         self.clock = pygame.time.Clock()
@@ -128,6 +130,7 @@ class AlienInvasion(Settings):
 
         self.ship.blitme()
         self.aliens.draw(self.screen)
+        self.sb.show_score()
         
         if not self.game_active:
             self.play_button.draw_button()
