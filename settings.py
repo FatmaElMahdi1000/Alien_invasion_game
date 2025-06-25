@@ -24,6 +24,7 @@ class Settings:
         self.alien_speed = 1.0 #alien's horizontal speed, movement
         #self.fleed_direction = 1, means moving right, -1 means moving left
         self.fleet_direction = 1
+        self.alien_points = 50 #Alien's points value.
     
     def increase_speed(self):
         self.ship_speed *= self.speed_scale 

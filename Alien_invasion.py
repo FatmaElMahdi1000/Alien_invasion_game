@@ -70,7 +70,8 @@ class AlienInvasion(Settings):
             Result: Even if button is clicked, do nothing 🚫
             """
             self.settings.initialize_dynamic_setting()
-            self.stats.reset_stat()   ##reset game stats 
+            self.stats.reset_stat()   ##reset game stats
+            self.sb.prep_score() ##prepping the score when starting a new game, a score of 0
             self.game_active = True
             self.bullets.empty()###getting red of any remaining bullets and alients, then creating new fleet/centering the ship
             self.aliens.empty()
@@ -108,6 +109,11 @@ class AlienInvasion(Settings):
 
     def _check_bullet_alien_collisions(self):
         collisions = pygame.sprite.groupcollide(self.bullets, self.aliens, True, True)
+        
+        if collisions:
+            self.stats.score += self.settings.alien_points
+            self.sb.prep_score()
+            
         if not self.aliens:
             self.bullets.empty()
             self._create_fleet()
