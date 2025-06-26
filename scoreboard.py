@@ -16,7 +16,7 @@ class Score:
     def prep_score(self):
         rounded_score = round(self.stats.score, -1) #rounding to the nearest 10
         
-        score_str = f"{rounded_score:,}"
+        score_str = f"Score: {rounded_score:,}"
         
         self.score_image = self.font.render(score_str,True, self.text_colour,self.settings.bg_colour) #color of text, back ground, the text itself
         self.score_rect = self.score_image.get_rect()
@@ -25,7 +25,7 @@ class Score:
 
     def prep_high_score(self):
         high_score = round(self.stats.high_score, -1)
-        high_score_str = f"{high_score:,}"
+        high_score_str = f"High Score: {high_score:,}"
         self.high_score_image = self.font.render(high_score_str, True, self.text_colour, self.settings.bg_colour)
         #centering the high score 
         self.high_score_rect = self.high_score_image.get_rect()
@@ -43,8 +43,8 @@ class Score:
             self.prep_high_score()
     
     def prep_level(self):
-        level_str = str(self.stats.level)
-        self.level_image = self.font.render(level_str, True, self.text_colour, self.settings.bg_colour)
+        level_str = f"Level: {self.stats.level}" 
+        self.level_image = self.font.render(level_str, True, self.text_colour, None) #used None to make background transparent so Level text does not cover the alien that's moving.
         self.level_rect = self.level_image.get_rect()
         self.level_rect.right = self.score_rect.right
         self.level_rect.top = self.score_rect.bottom + 10
