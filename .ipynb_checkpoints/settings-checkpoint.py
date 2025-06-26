@@ -1,6 +1,7 @@
 class Settings:
     def __init__(self):
         self.speed_scale = 1.1 #How quickly the game speed up
+        self.score_scale = 1.5
         self.screen_height  = 1200 #dummy value, I'll override the values in alien_invasion file
         self.screen_width = 200 #dummy value, I'll override the values in alien_invasion file
         self.bg_colour = (255, 255, 255)  # Bright cyan for easy ship visibility
@@ -30,4 +31,5 @@ class Settings:
         self.ship_speed *= self.speed_scale 
         self.bullet_speed *= self.speed_scale
         self.alien_speed *= self.speed_scale
+        self.alien_points = int(self.alien_points * self.score_scale)
     
