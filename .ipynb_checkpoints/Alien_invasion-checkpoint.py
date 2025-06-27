@@ -182,8 +182,8 @@ class AlienInvasion(Settings):
                 break
 
     def _ship_hit(self):
+        self.stats.ships_left -= 1
         if self.stats.ships_left > 0:
-            self.stats.ships_left -= 1
             self.sb.prep_ships()
             self.aliens.empty()
             self.bullets.empty()
@@ -192,7 +192,7 @@ class AlienInvasion(Settings):
             sleep(0.5)
         else:
             self.game_active = False
-            pygame.mouse.visible(True)
+            pygame.mouse.set_visible(True)
 
 
     def _check_aliens_bottom(self):
