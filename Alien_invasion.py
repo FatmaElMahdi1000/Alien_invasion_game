@@ -1,4 +1,5 @@
 from scoreboard import Score 
+from ExitButton import Exit_Button
 from time import sleep
 from button import Button
 from Gamestat import GameStat
@@ -58,6 +59,7 @@ class AlienInvasion(Settings):
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()     #This gives you the (x, y) position of where the player clicked. 
                 self._check_play_button(mouse_pos)
+                self._check_Exit_Button(mouse_pos)
  
     def _check_play_button(self, mouse_pos):
         button_clicked = self.play_button.rect.collidepoint(mouse_pos) #button clicked means the value of self.game_active = True now, not false
@@ -80,7 +82,13 @@ class AlienInvasion(Settings):
             self._create_fleet()
             self.ship.center_ship()
             pygame.mouse.set_visible(False)
-    
+
+                
+    def _check_Exit_Button(self, mouse_pos):
+        if hasattr(self, 'Exit_Button'):
+            if self.Exit_Button.rect.collidepoint(mouse_pos) and not self.game_active:
+                sys.exit()
+                
     def _check_keydown_event(self, event):
         if event.key == pygame.K_RIGHT:
             self.ship.moving_right = True
@@ -148,7 +156,8 @@ class AlienInvasion(Settings):
         
         if not self.game_active:
             self.play_button.draw_button()
-
+            if hasattr(self, 'Exit_Button'):
+                self.Exit_Button.draw_button()
         pygame.display.flip()
 
     def _create_alien(self, x_position, y_position):
@@ -192,7 +201,9 @@ class AlienInvasion(Settings):
             sleep(0.5)
         else:
             self.game_active = False
+            self.Exit_Button = Exit_Button(self, "Exit")
             pygame.mouse.set_visible(True)
+            self._update_screen() #updating screen immediately 
 
 
     def _check_aliens_bottom(self):
