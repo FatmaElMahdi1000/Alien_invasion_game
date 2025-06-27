@@ -1,11 +1,13 @@
 # Ship file (ourship.py)
 import pygame
-
-class Ship:
+from pygame.sprite import Sprite
+class Ship(Sprite):
     """A class to manage the ship."""
     
-    def __init__(self, ai_game): 
+    def __init__(self, ai_game):
+        super().__init__()
         """Initialize the ship and set its starting position."""
+        self.ai_game = ai_game
         self.screen = ai_game.screen   # This line assigns the game's screen
         self.settings = ai_game.settings
         self.screen_rect = ai_game.screen.get_rect()

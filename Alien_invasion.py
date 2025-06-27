@@ -58,7 +58,7 @@ class AlienInvasion(Settings):
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()     #This gives you the (x, y) position of where the player clicked. 
                 self._check_play_button(mouse_pos)
-                
+ 
     def _check_play_button(self, mouse_pos):
         button_clicked = self.play_button.rect.collidepoint(mouse_pos) #button clicked means the value of self.game_active = True now, not false
         if button_clicked and not self.game_active: 
@@ -72,6 +72,8 @@ class AlienInvasion(Settings):
             self.settings.initialize_dynamic_setting()
             self.stats.reset_stat()   ##reset game stats
             self.sb.prep_score() ##prepping the score when starting a new game, a score of 0
+            self.sb.prep_level()
+            self.sb.prep_ships()
             self.game_active = True
             self.bullets.empty()###getting red of any remaining bullets and alients, then creating new fleet/centering the ship
             self.aliens.empty()
@@ -116,13 +118,14 @@ class AlienInvasion(Settings):
                 self.sb.prep_score()
                 self.sb.check_high_score()
                 self.sb.prep_level()
-            
+                
         if not self.aliens:
             self.bullets.empty()
             self._create_fleet()
             self.settings.increase_speed()
             self.stats.level += 1
             self.sb.prep_level()
+            
 
     def _update_aliens(self):
         self._check_fleet_edges()
@@ -181,6 +184,7 @@ class AlienInvasion(Settings):
     def _ship_hit(self):
         if self.stats.ships_left > 0:
             self.stats.ships_left -= 1
+            self.sb.prep_ships()
             self.aliens.empty()
             self.bullets.empty()
             self._create_fleet()
