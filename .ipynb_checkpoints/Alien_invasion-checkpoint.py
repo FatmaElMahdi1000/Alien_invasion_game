@@ -16,7 +16,10 @@ class AlienInvasion(Settings):
     def __init__(self):
         pygame.init()
         super().__init__()
-
+        pygame.mixer.music.load("Music/Speedier Than Photons.mp3")
+        pygame.mixer.music.set_volume(0.3)
+        pygame.mixer.music.play(-1)
+        self.music_playing = True
         self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
         self.screen_width = self.screen.get_rect().width
         self.screen_height = self.screen.get_rect().height
@@ -92,6 +95,7 @@ class AlienInvasion(Settings):
                 sys.exit()
                 
     def _check_keydown_event(self, event):
+        
         if event.key == pygame.K_RIGHT:
             self.ship.moving_right = True
         elif event.key == pygame.K_LEFT:
@@ -102,6 +106,13 @@ class AlienInvasion(Settings):
             self._fire_bullet()
         elif event.key == pygame.K_p:
             self.paused = not self.paused
+        elif event.key == pygame.K_m:  # Press 'M' to mute/unmute
+            if self.music_playing:
+                pygame.mixer.music.pause()
+                self.music_playing = False
+            else:
+                pygame.mixer.music.unpause()
+                self.music_playing = True
 
     def _check_keyup_event(self, event):
         if event.key == pygame.K_LEFT:
