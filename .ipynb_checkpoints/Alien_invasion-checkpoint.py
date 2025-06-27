@@ -34,13 +34,15 @@ class AlienInvasion(Settings):
 
         self._create_fleet()
         self.game_active = False #start the game in an inactive state
+        self.paused = False
 
     def run_game(self):
         while True:
             self._check_events()
             self.ship.update()
 
-            if self.game_active:
+            if self.game_active and not self.paused:
+                self.ship.update()
                 self._update_bullets()
                 self._update_aliens()
                 self.bullets.update()
@@ -98,6 +100,8 @@ class AlienInvasion(Settings):
             sys.exit()
         elif event.key == pygame.K_SPACE:
             self._fire_bullet()
+        elif event.key == pygame.K_p:
+            self.paused = not self.paused
 
     def _check_keyup_event(self, event):
         if event.key == pygame.K_LEFT:
