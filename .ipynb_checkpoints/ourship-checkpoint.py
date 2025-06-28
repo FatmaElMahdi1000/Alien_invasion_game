@@ -13,7 +13,7 @@ class Ship(Sprite):
         self.screen_rect = ai_game.screen.get_rect()
         
         # Load the ship image and scale it down to fit nicely
-        self.image = pygame.image.load('Images/Screenshot 2025-06-28 024315.bmp')
+        self.image = pygame.image.load('Images/Screenshot-2025-06-28-130744.bmp')
         self.image = pygame.transform.scale(self.image, (80, 100))  
         self.rect = self.image.get_rect()
         self.x = float(self.rect.x)
