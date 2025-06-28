@@ -6,7 +6,7 @@ class Alien(Sprite):
         super().__init__()
         self.screen = ai_game.screen
         #Loading our Alient Game
-        self.image = pygame.image.load('Images/Microsoft-Fluentui-Emoji-3d-Alien-Monster-3d.512.png')
+        self.image = pygame.image.load('Images/Microsoft-Fluentui-Emoji-3d-Alien-Monster-3d.512.bmp')
         self.image = pygame.transform.scale(self.image, (60, 60))
         self.rect = self.image.get_rect()
         self.settings = ai_game.settings

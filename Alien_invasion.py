@@ -106,6 +106,11 @@ class AlienInvasion(Settings):
             self._fire_bullet()
         elif event.key == pygame.K_p:
             self.paused = not self.paused
+            if self.paused:
+                pygame.mixer.music.pause()
+            else:
+                pygame.mixer.music.unpause()
+                 
         elif event.key == pygame.K_m:  # Press 'M' to mute/unmute
             if self.music_playing:
                 pygame.mixer.music.pause()
