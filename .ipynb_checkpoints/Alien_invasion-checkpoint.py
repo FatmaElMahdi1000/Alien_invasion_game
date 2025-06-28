@@ -87,8 +87,10 @@ class AlienInvasion(Settings):
             self._create_fleet()
             self.ship.center_ship()
             pygame.mouse.set_visible(False)
-
-                
+            pygame.mixer.music.stop()
+            pygame.mixer.music.load("Music/Speedier Than Photons.mp3")
+            pygame.mixer.music.play(-1)
+         
     def _check_Exit_Button(self, mouse_pos):
         if hasattr(self, 'Exit_Button'):
             if self.Exit_Button.rect.collidepoint(mouse_pos) and not self.game_active:
@@ -173,6 +175,8 @@ class AlienInvasion(Settings):
         self.ship.blitme()
         self.aliens.draw(self.screen)
         self.sb.show_score()
+
+        """Updating the screen with game over"""
         
         if not self.game_active:
             self.play_button.draw_button()
@@ -220,12 +224,15 @@ class AlienInvasion(Settings):
             self.ship.center_ship()
             sleep(0.5)
         else:
+            """display game over first"""
+            pygame.mixer.music.stop()  # Stop background music
+            pygame.mixer.music.load('Music/game_over_1.mp3')
+            pygame.mixer.music.play()
             self.game_active = False
-            self.Exit_Button = Exit_Button(self, "Exit")
+            self.Exit_Button = Exit_Button(self, "Exit") 
             pygame.mouse.set_visible(True)
             self._update_screen() #updating screen immediately 
-
-
+           
     def _check_aliens_bottom(self):
         for alien in self.aliens.sprites():
             if alien.rect.bottom >= self.screen_height:
