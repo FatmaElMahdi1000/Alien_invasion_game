@@ -224,7 +224,7 @@ class AlienInvasion(Settings):
             self.ship.center_ship()
             sleep(0.5)
         else:
-            """display game over first"""
+            """run game over audio!"""
             pygame.mixer.music.stop()  # Stop background music
             pygame.mixer.music.load('Music/game_over_1.mp3')
             pygame.mixer.music.play()
