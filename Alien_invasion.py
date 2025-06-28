@@ -1,3 +1,4 @@
+from Explosion import Explosion
 from scoreboard import Score 
 from ExitButton import Exit_Button
 from time import sleep
@@ -25,7 +26,7 @@ class AlienInvasion(Settings):
         self.screen_height = self.screen.get_rect().height
 
         pygame.display.set_caption(Game_Title)
-
+        self.explosions = pygame.sprite.Group()
         self.settings = self
         self.stats = GameStat(self)
         self.sb = Score(self) #making an instance/object of Score class here in Alient invasion 
@@ -174,6 +175,9 @@ class AlienInvasion(Settings):
 
         self.ship.blitme()
         self.aliens.draw(self.screen)
+        self.explosions.update()
+        for explosion in self.explosions:
+            explosion.draw()
         self.sb.show_score()
 
         """Updating the screen with game over"""
@@ -215,6 +219,10 @@ class AlienInvasion(Settings):
                 break
 
     def _ship_hit(self):
+        '''ship exlodes'''
+        explosion = Explosion(self.screen, self.ship.rect.center)
+        self.explosions.add(explosion)
+        
         self.stats.ships_left -= 1
         if self.stats.ships_left > 0:   #2, 1, 0, check this 2>0, 1>0, 0
             self.sb.prep_ships()
@@ -222,7 +230,7 @@ class AlienInvasion(Settings):
             self.bullets.empty()
             self._create_fleet()
             self.ship.center_ship()
-            sleep(0.5)
+            pygame.time.delay(1000) 
         else:
             """run game over audio!"""
             pygame.mixer.music.stop()  # Stop background music
@@ -232,6 +240,7 @@ class AlienInvasion(Settings):
             self.Exit_Button = Exit_Button(self, "Exit") 
             pygame.mouse.set_visible(True)
             self._update_screen() #updating screen immediately 
+            
            
     def _check_aliens_bottom(self):
         for alien in self.aliens.sprites():

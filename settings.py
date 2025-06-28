@@ -14,7 +14,7 @@ class Settings:
         #Alien_settings 
 
         self.fleet_drop_speed = 10 #alien's vertical speed.
-        
+        self.max_level = 6 #limiting no. of levels
 
         self.initialize_dynamic_setting()
         
